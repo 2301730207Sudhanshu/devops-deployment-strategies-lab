@@ -1,0 +1,14 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: prod-cluster-daily-backup
+  namespace: velero
+spec:
+  schedule: "*/15 * * * *"
+  template:
+    includedNamespaces:
+      - production
+    storageLocation: aws-s3-dr-bucket
+    volumeSnapshotLocations:
+      - aws-ebs-dr
+    ttl: 168h0m0s
